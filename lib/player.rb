@@ -1,5 +1,3 @@
-
-
 class Player
   attr_accessor :name, :color
 
@@ -9,6 +7,6 @@ class Player
   end
 
   def get_move
-    
+
   end
 end

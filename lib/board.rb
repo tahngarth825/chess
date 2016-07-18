@@ -1,8 +1,7 @@
 require_relative "display"
-require_relative "sliding_piece"
-require_relative "step_piece"
-require_relative "pawn"
-require "byebug"
+require_relative "pieces/sliding_piece"
+require_relative "pieces/step_piece"
+require_relative "pieces/pawn"
 
 class Board
   attr_accessor :grid, :last_board
