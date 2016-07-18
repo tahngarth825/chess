@@ -37,16 +37,18 @@ TODO: SHOW OFF VIDEO
 1. Download the latest version of [Ruby][ruby]
 2. Download the repository and change into its directory
 3. In your terminal, run the following commands:
-`gem install bundler`
-`bundle install`
-`ruby lib/game.rb`
+* `gem install bundler`
+* `bundle install`
+* `ruby lib/game.rb`
 4. To quit, press `ctrl`+`c`
 
 ###Technical Details
-1. Utilizes the colorize gem to color the board
+1. Utilizes the [colorize][colorize] gem to color the board
 2. Uses the [cursorable][cursorable] library
-3. Uses [ruby link][Ruby]
+3. Uses [Ruby][ruby]
 
+[colorize]:
+https://rubygems.org/gems/colorize/versions/0.8.1
 [ruby]:
 https://www.ruby-lang.org/en/downloads/
 [cursorable]: https://github.com/rglassett/ruby-cursor-game/blob/master/lib/cursorable.rb
