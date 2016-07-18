@@ -25,21 +25,22 @@ class Game
 
   def play_turn
     @display.render
-    p "#{@cur_player.name}'s turn (#{@cur_player.color})"
+    puts "#{@cur_player.name}'s turn (#{@cur_player.color})"
     if @board.in_check?(@cur_player.color)
       puts "#{@cur_player.name} is in check"
     end
+
     begin
-    move = @cur_player.get_move(@display)
-    @display.set_selected([])
-    if move == nil
-      return
-    end
-    @board.move(move[0], move[1], cur_player.color)
-    next_player
-    rescue StandardError => e
-      puts e.message
-      retry
+      move = @cur_player.get_move(@display)
+      @display.set_selected([])
+      if move == nil
+        return
+      end
+      @board.move(move[0], move[1], cur_player.color)
+      next_player
+      rescue StandardError => e
+        puts e.message
+        retry
     end
     @display.last_move = move
 
@@ -54,16 +55,48 @@ class Game
   end
 end
 
-if __FILE__ == $PROGRAM_NAME
+def start_game
   board = Board.new
-  player1 = HumanPlayer.new("Richard", :white)
-  player2 = HumanPlayer.new("Jordan", :black)
+
+  puts "What is your name?"
+  name1 = gets.chomp
+
+  response = false
+
+  while (!parse_response(response))
+    puts "Hi #{name1}! Would you like to play against a computer or human? (c/h)"
+    response = gets.chomp
+
+    if (!parse_response(response))
+      puts "Invalid input. Please either type 'c' or 'h'"
+    end
+  end
+
+  name2="Computer"
+
+  player1 = HumanPlayer.new(name1, :white)
+  player2 = ""
+
+  if (response == "c")
+    player2 = ComputerPlayer.new(name2, :black)
+  elsif (response == "h")
+    puts "Enter the name of the second player"
+    name2 = gets.chomp
+    player2 = HumanPlayer.new(name2, :black)
+  end
+
   game = Game.new(board, player1, player2)
   game.play
 end
 
-#TO DO LIST
-#add logic for castling and "en passe"
-#add "undo" for players?
-#add pawn promotion
-#highlight all possible moves of selected token
+def parse_response(response)
+  if (response == "c" || response == "computer")
+    return "c"
+  elsif (response == "h" || response == "human")
+    return "h"
+  else
+    return false
+  end
+end
+
+start_game

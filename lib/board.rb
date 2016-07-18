@@ -231,17 +231,3 @@ class Board
     puts "Undo successful!"
   end
 end
-
-if __FILE__ == $PROGRAM_NAME
-  board = Board.new
-  display = Display.new(board)
-  board.populate
-  board_copy = board.deep_dup
-  board.move([0,0], [1,0], :black)
-  display.render
-
-
-  display2 = Display.new(board_copy)
-  display2.render
-
-end

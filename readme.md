@@ -43,8 +43,8 @@ TODO: SHOW OFF VIDEO
 4. To quit, press `ctrl`+`c`
 
 ###Technical Details
-1. Utilizes the [colorize][colorize] gem to color the board
-2. Uses the [cursorable][cursorable] library
+1. Uses the [colorize][colorize] gem to color the board
+2. Uses the [cursorable][cursorable] library to recognize keypresses
 3. Uses [Ruby][ruby]
 
 [colorize]:
@@ -54,7 +54,9 @@ https://www.ruby-lang.org/en/downloads/
 [cursorable]: https://github.com/rglassett/ruby-cursor-game/blob/master/lib/cursorable.rb
 
 ###Features to implement on my own
+0. Pawn promotion
 1. Castling
 2. En passe
 3. Allow user input of names
+4. Highlight existing possible moves
 100. Refactoring of code
