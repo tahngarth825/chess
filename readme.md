@@ -37,9 +37,9 @@ TODO: SHOW OFF VIDEO
 1. Download the latest version of [Ruby][ruby]
 2. Download the repository and change into its directory
 3. In your terminal, run the following commands:
-* `gem install bundler`
-* `bundle install`
-* `ruby lib/game.rb`
+  * `gem install bundler`
+  * `bundle install`
+  * `ruby lib/game.rb`
 4. To quit, press `ctrl`+`c`
 
 ###Technical Details
