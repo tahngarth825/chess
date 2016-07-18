@@ -3,7 +3,7 @@ This is a version of Chess playable in the terminal that was initially developed
 [partner]: https://github.com/jordvnkm
 
 ####Screenshot
-![image of game](http://res.cloudinary.com/tahngarth825/image/upload/v1468877563/Screenshot_from_2016-07-18_14-31-38_wwqqgd.png)
+![image of game](http://res.cloudinary.com/tahngarth825/image/upload/v1468877930/checkmate_rheehe.png)
 
 ####Code for deep duping that allows for the undo function
 ```ruby
