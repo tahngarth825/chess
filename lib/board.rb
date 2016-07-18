@@ -4,11 +4,12 @@ require_relative "pieces/step_piece"
 require_relative "pieces/pawn"
 
 class Board
-  attr_accessor :grid, :last_board
+  attr_accessor :grid, :last_board, :undo_success
 
   def initialize(grid = Array.new(8) {Array.new(8) {nil}}, last_board = nil)
     @grid = grid
     @last_board = last_board
+    @undo_success = false;
   end
 
   def [] (pos)
@@ -205,9 +206,9 @@ class Board
     return false
   end
 
-  def display_winner(color)
+  def display_winner(color, name)
     if (checkmate?(color))
-      puts  "Checkmate! #{other_color(color)} wins!"
+      puts  "Checkmate! #{name} wins!"
     elsif (stalemate?(:black) || stalemate?(:white))
       puts "Stalemate; nobody wins :/"
     end
@@ -227,7 +228,8 @@ class Board
   end
 
   def undo
-    @grid = last_board.last_board.grid
-    puts "Undo successful!"
+    if (@grid = last_board.last_board.grid)
+      @undo_success = true
+    end
   end
 end

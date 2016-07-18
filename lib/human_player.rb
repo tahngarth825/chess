@@ -11,7 +11,7 @@ class HumanPlayer < Player
     while move.length < 2
       input = display.get_input
       display.render
-      p "#{@name}'s turn (#{@color})"
+      puts "#{@name}'s turn (#{@color})"
       if display.board.in_check?(@color)
         puts "#{@name} is in check"
       end

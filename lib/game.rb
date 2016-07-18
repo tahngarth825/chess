@@ -20,15 +20,34 @@ class Game
       play_turn
     end
     @display.render
-    @board.display_winner(@cur_player.color)
+    @board.display_winner(@cur_player.color, other_player.name)
+  end
+
+  def other_player
+    if (@cur_player == @player1)
+      return @player2
+    else
+      return @player1
+    end
+  end
+
+  def turn_display
+    if (@board.undo_success == true)
+      puts "Undo successful!"
+      @board.undo_success = false
+    end
+
+    puts "#{@cur_player.name}'s turn (#{@cur_player.color})"
+
+    if @board.in_check?(@cur_player.color)
+      puts "#{@cur_player.name} is in check"
+    end
   end
 
   def play_turn
     @display.render
-    puts "#{@cur_player.name}'s turn (#{@cur_player.color})"
-    if @board.in_check?(@cur_player.color)
-      puts "#{@cur_player.name} is in check"
-    end
+
+    turn_display
 
     begin
       move = @cur_player.get_move(@display)
@@ -43,7 +62,6 @@ class Game
         retry
     end
     @display.last_move = move
-
   end
 
   def next_player

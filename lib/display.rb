@@ -55,7 +55,10 @@ class Display
       print "\n"
     end
     unless @last_move == nil
-      p "last move was from #{@last_move[0]} to #{@last_move[1]}"
+      puts "last move was from #{@last_move[0]} to #{@last_move[1]}"
     end
+    puts "Choose a square with the arrow keys."
+    puts "Select a starting and ending position by pressing Enter."
+    puts "Press u to undo a move"
   end
 end
