@@ -3,7 +3,7 @@ This is a version of Chess playable in the terminal that was initially developed
 [partner]: https://github.com/jordvnkm
 
 ####Screenshot
-![image of game](SAMPLE URL)
+![image of game](http://res.cloudinary.com/tahngarth825/image/upload/v1468877563/Screenshot_from_2016-07-18_14-31-38_wwqqgd.png)
 
 ####Code for deep duping that allows for the undo function
 ```ruby
@@ -57,6 +57,5 @@ https://www.ruby-lang.org/en/downloads/
 0. Pawn promotion
 1. Castling
 2. En passe
-3. Allow user input of names
 4. Highlight existing possible moves
 100. Refactoring of code
