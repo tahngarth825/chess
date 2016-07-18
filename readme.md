@@ -1,9 +1,9 @@
 ##Chess
-This is a version of Chess playable in the terminal that was initially developed in conjunction with my partner [Partner's Link][Jordan Minatogawa]. Features that we implemented together include a smart AI that prioritizes higher-value targets and an undo function.
+This is a version of Chess playable in the terminal that was initially developed in conjunction with my partner [Jordan Minatogawa][partner]. Features that we implemented together include a smart AI that prioritizes higher-value targets and an undo function.
 [partner]: https://github.com/jordvnkm
 
 ####Screenshot
-![image of gamee](SAMPLE URL)
+![image of game](SAMPLE URL)
 
 ####Code for deep duping that allows for the undo function
 ```ruby
@@ -30,11 +30,11 @@ def deep_dup
 end
 ```
 
-##Demo of game
+###Demo of game
 TODO: SHOW OFF VIDEO
 
 ###Instructions to play
-1. Download the latest version of [ruby link][Ruby]
+1. Download the latest version of [Ruby][ruby]
 2. Download the repository and change into its directory
 3. In your terminal, run the following commands:
 `gem install bundler`
@@ -44,13 +44,12 @@ TODO: SHOW OFF VIDEO
 
 ###Technical Details
 1. Utilizes the colorize gem to color the board
-2. Uses the [cursorable link][cursorable] library
+2. Uses the [cursorable][cursorable] library
 3. Uses [ruby link][Ruby]
 
-[cursorable link]: https://github.com/rglassett/ruby-cursor-game/blob/master/lib/cursorable.rb
-
-[ruby link]:
+[ruby]:
 https://www.ruby-lang.org/en/downloads/
+[cursorable]: https://github.com/rglassett/ruby-cursor-game/blob/master/lib/cursorable.rb
 
 ###Features to implement on my own
 1. Castling
