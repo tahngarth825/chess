@@ -1,5 +1,8 @@
 ##Chess
 This is a version of Chess playable in the terminal that was initially developed in conjunction with my partner [Jordan Minatogawa][partner]. Features that we implemented together include a smart AI that prioritizes higher-value targets and an undo function.
+
+Features that I updated include starting the game with a choice of 1-player or 2-player, refactoring code, improving user experience by parsing outputs, and including instructions.
+
 [partner]: https://github.com/jordvnkm
 
 ####Screenshot

@@ -37,6 +37,7 @@ class Board
     end
   end
 
+  #Could refactor to make a constants file and and refer to that in determining type
   def set_rooks
     self[[0,0]] = SlidingPiece.new([0,0], :black, "R ")
     self[[0,7]] = SlidingPiece.new([0,7], :black, "R ")
@@ -137,6 +138,7 @@ class Board
     false
   end
 
+  #Used mostly to find king, since finds first match
   def find_position(type, color)
     @grid.each_with_index do |row, ridx|
       row.each_with_index do |square, cidx|
@@ -231,5 +233,54 @@ class Board
     if (@grid = last_board.last_board.grid)
       @undo_success = true
     end
+  end
+
+  #black starts top, so promote if reach bottom
+  #Type of pawn is "P " with space intentional for when printing out to align
+  #Could have refactored to have a to_s which would add the space
+  def check_promote_pawn
+    @grid[0].each do |square|
+      if (square != nil && square.type == "P " && square.color == :white)
+        return square
+      end
+    end
+
+    @grid[7].each do |square|
+      if (square != nil && square.type == "P " && square.color == :black)
+        return square
+      end
+    end
+
+    return nil
+  end
+
+  def promote_pawn(piece, player_name)
+    response = false
+
+    pos = piece.position
+    color = piece.color
+
+    while (response == false)
+      puts "#{player_name}'s pawn has reached the end and is available to promote!"
+      puts "What piece would you like? (Queen = 'q', Rook = 'r', Bishop = 'b', Knight = 'k')"
+      response = gets.chomp
+
+      if (response.downcase == "q")
+        self[pos] = SlidingPiece.new(pos, color, "Q ")
+      elsif (response.downcase == "r")
+        self[pos] = SlidingPiece.new(pos, color, "R ")
+      elsif (response.downcase == "b")
+        self[pos] = SlidingPiece.new(pos, color, "B ")
+      elsif (response.downcase == "k")
+        self[pos] = StepPiece.new(pos, color, "Kn")
+      else
+        puts "Invalid Input. Try again."
+        response = false
+      end
+    end
+
+    self[pos].set_board(self)
+
+    return true
   end
 end

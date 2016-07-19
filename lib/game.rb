@@ -2,6 +2,7 @@ require_relative "board"
 require_relative "display"
 require_relative "human_player"
 require_relative "computer_player"
+require 'io/console'
 
 class Game
   attr_accessor :board, :player1, :player2, :cur_player, :display
@@ -61,7 +62,10 @@ class Game
         puts e.message
         retry
     end
+
     @display.last_move = move
+
+    promote_pawn
   end
 
   def next_player
@@ -71,7 +75,25 @@ class Game
       @cur_player = @player1
     end
   end
+
+  def promote_pawn
+    piece = @board.check_promote_pawn
+
+    if (piece == nil)
+      return nil
+    end
+
+    @display.render
+
+    @board.promote_pawn(piece, @cur_player.name)
+    @display.render
+    puts "Pawn promotion successful!"
+    puts "Press any key to continue"
+    STDIN.getch
+    puts "\r"
+  end
 end
+
 
 def start_game
   board = Board.new
