@@ -13,6 +13,7 @@ class StepPiece < Piece
     if type == "Ki"
       @movelist = [:upleft, :upright, :downleft,
         :downright, :right, :up, :down, :left]
+        @moved = false
       if @color == :black
         @icon = "\u265A"
       else
@@ -36,9 +37,10 @@ class StepPiece < Piece
     movelist.each do |direction|
       possible_moves.concat(get_moves(direction))
     end
-    return possible_moves
+    return possible_moves.concat(castling_moves)
   end
 
+  #Is just king's moves. Could be refactored
   def get_moves(direction)
     deltas = {:right => [0,1], :left => [0,-1],
       :up => [-1, 0], :down => [1,0], :upleft => [-1,-1],
@@ -55,7 +57,60 @@ class StepPiece < Piece
         possible_moves.push(new_pos)
       end
     end
+
     possible_moves
+  end
+
+  def castling_moves
+    possible_moves = []
+
+    #Cannot castle if king in check or moved; board initializes to nil
+    #Though I suppose @moved=true covers this initialized part.
+    #But just to be safe...
+    if (@moved == true || @board.nil? || @board.in_check?(@color)))
+      return possible_moves
+    end
+
+    castle_moves = {
+      :castle_right => [0,2],
+      :castle_left => [0,-2]
+    }
+
+    castle_moves.each do |direction, shift|
+      shifted_move = [@position[0]+shift[0], @position[1]+shift[1]]
+      target_pos = @board[shifted_move]
+
+      case direction
+      when :castle_right
+        #checks empty spots up to rook. could be refactored to be DRYer
+        if (@board[@position[0], @position[1]+1].nil? &&
+          @board[@position[0], @position[1]+2].nil?)
+
+          #checks rook didn't move and is your own
+          #color and type is implied if not moved, but just to be safe
+          piece = @board[@position[0], @position[1]+3]
+          if (!piece.nil? && piece.type == "R " &&
+            piece.color == @self.color && piece.moved == false)
+
+            possible_moves.push(target_pos)
+          end
+        end
+      when :castle_left
+        if (@board[@position[0], @position[1]-1].nil? &&
+          @board[@position[0], @position[1]-2].nil? &&
+          @board[@position[0], @position[1]-3].nil?)
+
+          piece = @board[@position[0], @position[1]-4]
+          if (!piece.nil? && piece.type == "R " &&
+            piece.color == @self.color && piece.moved == false)
+
+            possible_moves.push(target_pos)
+          end
+        end
+      end
+    end
+
+    return possible_moves
   end
 
   def get_knight_moves

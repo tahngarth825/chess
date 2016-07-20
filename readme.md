@@ -57,7 +57,8 @@ https://www.ruby-lang.org/en/downloads/
 [cursorable]: https://github.com/rglassett/ruby-cursor-game/blob/master/lib/cursorable.rb
 
 ###Features to implement on my own
-1. Castling
+1. Castling (Need to check that king won't be in check along the way. also need to move rook
+  when move king this way.)
 2. En passe
 4. Highlight existing possible moves
 100. Refactoring of code

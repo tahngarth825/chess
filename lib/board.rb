@@ -150,6 +150,7 @@ class Board
     nil
   end
 
+  #finds if a color piece can move to a position
   def can_move_to?(position, color)
     @grid.each do |row|
       row.each do |square|
@@ -269,6 +270,7 @@ class Board
         self[pos] = SlidingPiece.new(pos, color, "Q ")
       elsif (response.downcase == "r")
         self[pos] = SlidingPiece.new(pos, color, "R ")
+        self[pos].moved = true
       elsif (response.downcase == "b")
         self[pos] = SlidingPiece.new(pos, color, "B ")
       elsif (response.downcase == "k")

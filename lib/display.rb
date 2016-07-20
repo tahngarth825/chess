@@ -60,6 +60,7 @@ class Display
     puts "Choose a square with the arrow keys."
     puts "Select a starting and ending position by pressing Enter."
     puts "Press u to undo a move"
+    puts "Castle by moving the king two spaces in the appropriate direction"
   end
 
   def parse_move(move)

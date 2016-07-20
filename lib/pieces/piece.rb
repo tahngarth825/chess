@@ -12,7 +12,7 @@ class Piece
     @board = board
   end
 
-  def moves # returns a list of valid moves
+  def moves # returns a list of valid moves in children
 
   end
 
@@ -22,7 +22,7 @@ class Piece
 
   def update_position(position)
     @position = position
-    if @type == "P "
+    if (@type == "P " || @type == "Ki" || @type == "R ")
       @moved = true
     end
   end
