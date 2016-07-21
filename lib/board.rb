@@ -86,6 +86,7 @@ class Board
     return true
   end
 
+  #used to move and see if valid
   def move(start_pos, end_pos, cur_player)
     if self[start_pos] == nil
       raise StandardError.new("no piece in starting position")
@@ -100,11 +101,15 @@ class Board
 
     @last_board = deep_dup
 
+    handle_castling(piece, end_pos)
+
     self[start_pos] = nil
     self[end_pos] = piece
+
     piece.update_position(end_pos)
   end
 
+  #used to force a move without checking for check
   def move!(start_pos, end_pos, cur_player)
     if self[start_pos] == nil
       raise StandardError.new("no piece in starting position")
@@ -120,6 +125,33 @@ class Board
     self[start_pos] = nil
     self[end_pos] = piece
     piece.update_position(end_pos)
+  end
+
+  #only need to move rook; king moves normally from #move
+  def handle_castling(piece, end_pos)
+    castling_pos = [
+      [0,2],
+      [7,2],
+      [0,6],
+      [7,6]
+    ]
+
+    if (piece.type == "Ki" &&
+      piece.moved == false &&
+      castling_pos.include?(end_pos))
+
+      if (end_pos == castling_pos[0] || end_pos == castling_pos[1])
+        rook = self[[piece.position[0], piece.position[1]-4]]
+        self[[piece.position[0], piece.position[1]-4]] = nil
+        rook.moved = true
+        self[[piece.position[0], piece.position[1]-1]] = rook
+      else
+        rook = self[[piece.position[0], piece.position[1]+3]]
+        self[[piece.position[0], piece.position[1]+3]] = nil
+        rook.moved = true
+        self[[piece.position[0], piece.position[1]+1]] = rook
+      end
+    end
   end
 
   def other_color(color)
@@ -167,7 +199,7 @@ class Board
     if in_check?(color)
       @grid.each do |row|
         row.each do |square|
-          if square == nil || square.color != color
+          if (square == nil || square.color != color)
             next
           else
             return false unless square.valid_moves.empty?
@@ -220,7 +252,7 @@ class Board
   def stalemate?(color)
     @grid.each do |row|
       row.each do |square|
-        if square == nil || square.color != color
+        if (square == nil || square.color != color)
           next
         else
           return false unless square.valid_moves.empty?

@@ -57,7 +57,19 @@ https://www.ruby-lang.org/en/downloads/
 [cursorable]: https://github.com/rglassett/ruby-cursor-game/blob/master/lib/cursorable.rb
 
 ###Features to implement on my own
-1. Castling ( also need to move rook when move king this way.)
+1. Castling (currently bugged b/c calling can_move_to within castling, yet
+  can_move_to checks valid moves)
 2. En passe
 4. Highlight existing possible moves
 100. Refactoring of code
+
+
+####Notes
+In Piece valid_moves, I call can_move_to, yet can_move_to relies on units' valid moves
+In bug, it was happening with white king's moves
+
+Right now, valid_moves in piece.rb is with check, and moves in step_piece.rb is
+without check. You make a move and then check for being in check, so check for
+castle validations only in valid moves, not in moves.   
+
+Make sure valid_moves in piece.rb is working! (last two functions)
