@@ -131,16 +131,17 @@ class Board
   #only need to move rook; king moves normally from #move
   #logic of valid handles in #valid_moves piece.rb
   def handle_castling(piece, end_pos)
+    castling_pos = [
+      [0,2],
+      [7,2],
+      [0,6],
+      [7,6]
+    ]
+
     if (piece.type == "Ki" &&
       piece.moved == false &&
       castling_pos.include?(end_pos))
 
-      castling_pos = [
-        [0,2],
-        [7,2],
-        [0,6],
-        [7,6]
-      ]
 
       if (end_pos == castling_pos[0] || end_pos == castling_pos[1])
         rook = self[[piece.position[0], piece.position[1]-4]]
@@ -301,14 +302,14 @@ class Board
       response = gets.chomp
 
       if (response.downcase == "q")
-        self[pos] = SlidingPiece.new(pos, color, "Q ")
+        self[pos] = SlidingPiece.new(pos, color, "Q ", true)
       elsif (response.downcase == "r")
-        self[pos] = SlidingPiece.new(pos, color, "R ")
+        self[pos] = SlidingPiece.new(pos, color, "R ", true)
         self[pos].moved = true
       elsif (response.downcase == "b")
-        self[pos] = SlidingPiece.new(pos, color, "B ")
+        self[pos] = SlidingPiece.new(pos, color, "B ", true)
       elsif (response.downcase == "k")
-        self[pos] = StepPiece.new(pos, color, "Kn")
+        self[pos] = StepPiece.new(pos, color, "Kn", true)
       else
         puts "Invalid Input. Try again."
         response = false

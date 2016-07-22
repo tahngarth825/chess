@@ -80,3 +80,7 @@ Remove debuggers and require byebug
 
 enable a "q" => quit
 enable "i" => instructions
+
+black rook moving at top, then going back, still allows castling. no piece detected
+in starting position even though cannot land there. seems to only affect black, not
+white?
