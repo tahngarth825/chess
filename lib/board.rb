@@ -150,6 +150,7 @@ class Board
           self[[piece.position[0], piece.position[1]-4]] = nil
           rook.moved = true
           self[[piece.position[0], piece.position[1]-1]] = rook
+          rook.update_position([piece.position[0], piece.position[1]-1])
         end
       else
         rook = self[[piece.position[0], piece.position[1]+3]]
@@ -158,6 +159,7 @@ class Board
           self[[piece.position[0], piece.position[1]+3]] = nil
           rook.moved = true
           self[[piece.position[0], piece.position[1]+1]] = rook
+          rook.update_position([piece.position[0], piece.position[1]+1])
         end
       end
     end

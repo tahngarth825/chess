@@ -64,23 +64,9 @@ https://www.ruby-lang.org/en/downloads/
 
 
 ####Notes
-In Piece valid_moves, I call can_move_to, yet can_move_to relies on units' valid moves
-In bug, it was happening with white king's moves
-
-Right now, valid_moves in piece.rb is with check, and moves in step_piece.rb is
-without check. You make a move and then check for being in check, so check for
-castle validations only in valid moves, not in moves.   
-
-Make sure valid_moves in piece.rb is working! (last two functions)
-
-game starts with wrong color icons for top?
-
-Remove debuggers and require byebug
-
 enable a "q" => quit
 enable "i" => instructions
 
-Not triggering that rook moved; only that king moved.
 No piece detected in starting position even though cannot land there.
 
 King cannot move to castle location through 2 steps, but can still through 1 step
@@ -88,11 +74,6 @@ King cannot move to castle location through 2 steps, but can still through 1 ste
 I still should have nothing in beginning position error, but should no longer
 let king castle when rook moved
 
-
-I should be moving logic of checking if castling is okay from board.rb's handle_castling to
-piece.rb's check_castling
-
-
 Remove debuggers (board and piece)
 
-reset pawn spawn
+reset spawns
