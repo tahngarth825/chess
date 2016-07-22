@@ -2,6 +2,7 @@ require_relative "display"
 require_relative "pieces/sliding_piece"
 require_relative "pieces/step_piece"
 require_relative "pieces/pawn"
+require "byebug"
 
 class Board
   attr_accessor :grid, :last_board, :undo_success

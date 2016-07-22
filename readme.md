@@ -73,3 +73,6 @@ without check. You make a move and then check for being in check, so check for
 castle validations only in valid moves, not in moves.   
 
 Make sure valid_moves in piece.rb is working! (last two functions)
+
+
+Remove debuggers and require byebug

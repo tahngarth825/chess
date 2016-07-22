@@ -5,8 +5,8 @@ class StepPiece < Piece
 
   def initialize (starting_pos, color, type)
     @type = type
-    super(starting_pos, color)
     set_moves(type)
+    super(starting_pos, color)
   end
 
   def set_moves(type)

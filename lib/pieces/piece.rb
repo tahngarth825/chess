@@ -2,16 +2,15 @@ require "colorize"
 require "byebug"
 
 class Piece
-  attr_accessor :position, :color, :board, :icon
+  attr_accessor :position, :color, :board, :icon, :moved
 
   def initialize(start_pos, color)
     @color = color
     @position = start_pos
     @board = nil
+    @moved = false
     if (@type == "Ki" || @type == "R " || @type == "P ")
       @moved = false
-    else
-      @moved = true
     end
   end
 
