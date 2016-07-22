@@ -5,17 +5,22 @@ class Display
   include Cursorable
 
   attr_accessor :board, :cursor_pos, :selected,
-    :last_move
+    :last_move, :valid_moves
 
   def initialize(board)
     @cursor_pos = [0,0]
     @board = board
     @selected = []
     @last_move = nil
+    @valid_moves = []
   end
 
   def set_selected(pos)
     @selected = pos
+  end
+
+  def set_valid_moves(valid_moves)
+    @valid_moves = valid_moves
   end
 
   def undo
@@ -25,6 +30,8 @@ class Display
   def render
     system("clear")
     puts "    0   1   2   3   4   5   6   7"
+    color = :black
+
     @board.grid.each_with_index do |row,ridx|
       print "#{ridx} "
       row.each_with_index do |square,cidx|
@@ -32,24 +39,19 @@ class Display
         if (ridx + cidx) % 2 == 0
           bg = :light_white
         end
+
         if cursor_pos == [ridx, cidx]
-          if square == nil
-            print "    ".colorize(:background => :magenta)
-          else
-            print square.render.colorize(:background => :magenta)
-          end
-        elsif selected == [ridx, cidx]
-          if square == nil
-            print "    ".colorize(:background => :light_yellow)
-          else
-            print square.render.colorize(:background => :light_yellow)
-          end
+          bg = :magenta
+        elsif @selected == [ridx, cidx]
+          bg = :light_yellow
+        elsif @valid_moves.include?([ridx, cidx])
+          bg = :green
+        end
+
+        if square == nil
+          print "    ".colorize(:color => color, :background => bg)
         else
-          if square == nil
-            print "    ".colorize(:color => :black, :background => bg)
-          else
-            print square.render.colorize(:color => :black, :background => bg)
-          end
+          print square.render.colorize(:color => color, :background => bg)
         end
       end
       print "\n"

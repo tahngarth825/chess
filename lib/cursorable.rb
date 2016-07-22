@@ -11,6 +11,7 @@ module Cursorable
     "a" => :left,
     "s" => :down,
     "d" => :right,
+    "q" => :quit,
     "\t" => :tab,
     "\r" => :return,
     "\n" => :newline,
@@ -39,7 +40,7 @@ module Cursorable
 
   def handle_key(key)
     case key
-    when :ctrl_c
+    when :ctrl_c, :quit
       exit 0
     when :return, :space
       @cursor_pos
@@ -51,6 +52,7 @@ module Cursorable
       return :undo
     else
       puts key
+      nil
     end
   end
 

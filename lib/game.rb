@@ -53,6 +53,7 @@ class Game
     begin
       move = @cur_player.get_move(@display)
       @display.set_selected([])
+      @display.set_valid_moves([])
       if move == nil
         return
       end

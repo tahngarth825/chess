@@ -1,4 +1,5 @@
 require_relative "player"
+require "byebug"
 
 class HumanPlayer < Player
 
@@ -8,13 +9,10 @@ class HumanPlayer < Player
 
   def get_move(display)
     move = []
+    valid_moves = []
+
     while move.length < 2
       input = display.get_input
-      display.render
-      puts "#{@name}'s turn (#{@color})"
-      if display.board.in_check?(@color)
-        puts "#{@name} is in check"
-      end
 
       if input == :undo
         return nil
@@ -23,6 +21,15 @@ class HumanPlayer < Player
       end
       if move.length == 1
         display.set_selected(move.first)
+        valid_moves = display.board[move.first].valid_moves if display.board[move.first]
+        display.set_valid_moves(valid_moves)
+      end
+
+      display.render
+
+      puts "#{@name}'s turn (#{@color})"
+      if display.board.in_check?(@color)
+        puts "#{@name} is in check"
       end
     end
     return move

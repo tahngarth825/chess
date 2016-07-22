@@ -1,7 +1,7 @@
 ##Chess
 This is a version of Chess playable in the terminal that was initially developed in conjunction with my partner [Jordan Minatogawa][partner]. Features that we implemented together include a smart AI that prioritizes higher-value targets and an undo function.
 
-Features that I updated include a choice of 1-player or 2-player, instructions, pawn promotion, castling, and en passant.
+Features that I updated include a choice of 1-player or 2-player, instructions, pawn promotion, castling, en passant, and highlighting of existing possible moves.
 
 [partner]: https://github.com/jordvnkm
 
@@ -51,8 +51,3 @@ https://rubygems.org/gems/colorize/versions/0.8.1
 [ruby]:
 https://www.ruby-lang.org/en/downloads/
 [cursorable]: https://github.com/rglassett/ruby-cursor-game/blob/master/lib/cursorable.rb
-
-###Features to implement on my own
-1. Highlight existing possible moves
-2. Enable "q" to quit and "i" for instructions
-3. Refactoring of code
