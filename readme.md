@@ -74,5 +74,9 @@ castle validations only in valid moves, not in moves.
 
 Make sure valid_moves in piece.rb is working! (last two functions)
 
+game starts with wrong color icons for top?
 
 Remove debuggers and require byebug
+
+enable a "q" => quit
+enable "i" => instructions

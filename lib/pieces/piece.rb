@@ -4,14 +4,11 @@ require "byebug"
 class Piece
   attr_accessor :position, :color, :board, :icon, :moved
 
-  def initialize(start_pos, color)
+  def initialize(start_pos, color, moved)
     @color = color
     @position = start_pos
     @board = nil
-    @moved = false
-    if (@type == "Ki" || @type == "R " || @type == "P ")
-      @moved = false
-    end
+    @moved = moved
   end
 
   def set_board(board)
@@ -49,7 +46,7 @@ class Piece
       end
 
       board_copy = @board.deep_dup
-      board_copy.move!(@position,move, @color)
+      board_copy.move!(@position, move, @color)
 
       unless board_copy.in_check?(@color)
         if (old_moved == false && castling_moves.values.include?(move))

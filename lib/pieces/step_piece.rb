@@ -3,10 +3,10 @@ require_relative "piece"
 class StepPiece < Piece
   attr_accessor :type, :movelist
 
-  def initialize (starting_pos, color, type)
+  def initialize (starting_pos, color, type, moved = "false")
     @type = type
+    super(starting_pos, color, moved)
     set_moves(type)
-    super(starting_pos, color)
   end
 
   def set_moves(type)
@@ -60,6 +60,10 @@ class StepPiece < Piece
     new_pos = [row+delta_x, col+delta_y]
 
     if (direction == :castle_left || direction == :castle_right)
+      if (@moved == true)
+        return []
+      end
+
       halfway = [row+(delta_x/2), col+(delta_y/2)]
       if (@board.in_bounds?(new_pos) && @board[new_pos] == nil &&
         @board[halfway] == nil)
@@ -67,7 +71,6 @@ class StepPiece < Piece
       end
     elsif @board.in_bounds?(new_pos)
       if (@board[new_pos] == nil || @board[new_pos].color != @color)
-
         possible_moves.push(new_pos)
       end
     end
@@ -102,6 +105,6 @@ class StepPiece < Piece
   end
 
   def dup
-    StepPiece.new(@position, @color, @type)
+    StepPiece.new(@position, @color, @type, @moved)
   end
 end

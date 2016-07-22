@@ -3,10 +3,10 @@ require_relative "piece"
 class SlidingPiece < Piece
   attr_accessor :type, :movelist
 
-  def initialize (starting_pos, color, type)
+  def initialize (starting_pos, color, type, moved = "false")
     @type = type
+    super(starting_pos, color, moved)
     set_moves(type)
-    super(starting_pos, color)
   end
 
   def set_moves(type)
@@ -71,6 +71,6 @@ class SlidingPiece < Piece
   end
 
   def dup
-    SlidingPiece.new(@position, @color, @type)
+    SlidingPiece.new(@position, @color, @type, @moved)
   end
 end

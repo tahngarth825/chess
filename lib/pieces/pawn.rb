@@ -3,9 +3,9 @@ require_relative "piece"
 class Pawn < Piece
   attr_accessor :type, :movelist
 
-  def initialize(starting_pos, color, type = "P ")
+  def initialize(starting_pos, color, type, moved = "false")
     @type = type
-    super(starting_pos, color)
+    super(starting_pos, color, moved)
     set_moves
   end
 
@@ -76,6 +76,6 @@ class Pawn < Piece
   end
 
   def dup
-    Pawn.new(@position, @color, @moved)
+    Pawn.new(@position, @color, @type, @moved)
   end
 end

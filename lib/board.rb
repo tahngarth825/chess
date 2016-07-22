@@ -2,7 +2,6 @@ require_relative "display"
 require_relative "pieces/sliding_piece"
 require_relative "pieces/step_piece"
 require_relative "pieces/pawn"
-require "byebug"
 
 class Board
   attr_accessor :grid, :last_board, :undo_success
@@ -72,11 +71,11 @@ class Board
 
   def set_pawns
     @grid[1].each_with_index do |square, index|
-      @grid[1][index] = Pawn.new([1,index], :black)
+      @grid[1][index] = Pawn.new([1,index], :black, "P ")
     end
 
     @grid[6].each_with_index do |square, index|
-      @grid[6][index] = Pawn.new([6,index], :white)
+      @grid[6][index] = Pawn.new([6,index], :white, "P ")
     end
   end
 
@@ -125,22 +124,23 @@ class Board
 
     self[start_pos] = nil
     self[end_pos] = piece
+
     piece.update_position(end_pos)
   end
 
   #only need to move rook; king moves normally from #move
   #logic of valid handles in #valid_moves piece.rb
   def handle_castling(piece, end_pos)
-    castling_pos = [
-      [0,2],
-      [7,2],
-      [0,6],
-      [7,6]
-    ]
-
     if (piece.type == "Ki" &&
       piece.moved == false &&
       castling_pos.include?(end_pos))
+
+      castling_pos = [
+        [0,2],
+        [7,2],
+        [0,6],
+        [7,6]
+      ]
 
       if (end_pos == castling_pos[0] || end_pos == castling_pos[1])
         rook = self[[piece.position[0], piece.position[1]-4]]
