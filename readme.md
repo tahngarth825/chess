@@ -53,29 +53,7 @@ https://www.ruby-lang.org/en/downloads/
 [cursorable]: https://github.com/rglassett/ruby-cursor-game/blob/master/lib/cursorable.rb
 
 ###Features to implement on my own
-1. Castling
-2. En passe
-<<<<<<< HEAD
-4. Highlight existing possible moves
-100. Refactoring of code
-
-
-####Notes
-enable a "q" => quit
-enable "i" => instructions
-
-No piece detected in starting position even though cannot land there.
-
-King cannot move to castle location through 2 steps, but can still through 1 step
-
-I still should have nothing in beginning position error, but should no longer
-let king castle when rook moved
-
-Remove debuggers (board and piece)
-
-reset spawns
-=======
-3. Highlight existing possible moves
-4. Add a video demo to this readme
-5. Refactoring of code
->>>>>>> master
+1. En passe
+2. Highlight existing possible moves
+3. Enable "q" to quit and "i" for instructions
+4. Refactoring of code
