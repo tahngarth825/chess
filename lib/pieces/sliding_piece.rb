@@ -3,7 +3,7 @@ require_relative "piece"
 class SlidingPiece < Piece
   attr_accessor :type, :movelist
 
-  def initialize (starting_pos, color, type, moved = "false")
+  def initialize (starting_pos, color, type, moved = false)
     @type = type
     super(starting_pos, color, moved)
     set_moves(type)
