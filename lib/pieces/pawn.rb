@@ -3,9 +3,8 @@ require_relative "piece"
 class Pawn < Piece
   attr_accessor :type, :movelist, :moved
 
-  def initialize(starting_pos, color, moved = false, type = "P ")
+  def initialize(starting_pos, color, type = "P ")
     @type = type
-    @moved = moved
     super(starting_pos, color)
     set_moves
   end

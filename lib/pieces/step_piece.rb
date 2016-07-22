@@ -14,7 +14,6 @@ class StepPiece < Piece
       @movelist = [:upleft, :upright, :downleft,
         :downright, :right, :up, :down, :left,
         :castle_left, :castle_right]
-        @moved = false
       if @color == :black
         @icon = "\u265A"
       else
@@ -47,7 +46,8 @@ class StepPiece < Piece
   end
 
   #Is just king's moves. Could be refactored. should be singular.
-  #Handles castle logic only that nothing is in the king's way
+  #Handles castle logic only in that nothing is in the king's way
+  #See #valid_moves in piece.rb for more castling logic
   def get_moves(direction)
     deltas = {:right => [0,1], :left => [0,-1],
       :up => [-1, 0], :down => [1,0], :upleft => [-1,-1],

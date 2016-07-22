@@ -12,7 +12,6 @@ class SlidingPiece < Piece
   def set_moves(type)
     if type == "R "
       @movelist = [:right, :up, :down, :left]
-      @moved = false
       if @color == :black
         @icon = "\u265C"
       else

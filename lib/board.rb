@@ -128,6 +128,7 @@ class Board
   end
 
   #only need to move rook; king moves normally from #move
+  #logic of valid handles in #valid_moves piece.rb
   def handle_castling(piece, end_pos)
     castling_pos = [
       [0,2],
