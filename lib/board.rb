@@ -2,7 +2,6 @@ require_relative "display"
 require_relative "pieces/sliding_piece"
 require_relative "pieces/step_piece"
 require_relative "pieces/pawn"
-require "byebug"
 
 class Board
   attr_accessor :grid, :last_board, :undo_success
@@ -25,11 +24,11 @@ class Board
 
   def populate
     set_rooks
-  #  set_knights
-  #  set_bishops
+    set_knights
+    set_bishops
     set_kings
-  #  set_queens
-  #  set_pawns
+    set_queens
+    set_pawns
 
     @grid.each_with_index do |row, ridx|
       row.each do |square, cidx|

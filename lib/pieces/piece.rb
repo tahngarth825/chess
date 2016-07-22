@@ -1,5 +1,4 @@
 require "colorize"
-require "byebug"
 
 class Piece
   attr_accessor :position, :color, :board, :icon, :moved

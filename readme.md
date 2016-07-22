@@ -32,10 +32,6 @@ def deep_dup
   new_board
 end
 ```
-
-###Demo of game
-TODO: SHOW OFF VIDEO
-
 ###Instructions to play
 1. Download the latest version of [Ruby][ruby]
 2. Download the repository and change into its directory
@@ -59,6 +55,7 @@ https://www.ruby-lang.org/en/downloads/
 ###Features to implement on my own
 1. Castling
 2. En passe
+<<<<<<< HEAD
 4. Highlight existing possible moves
 100. Refactoring of code
 
@@ -77,3 +74,8 @@ let king castle when rook moved
 Remove debuggers (board and piece)
 
 reset spawns
+=======
+3. Highlight existing possible moves
+4. Add a video demo to this readme
+5. Refactoring of code
+>>>>>>> master
