@@ -12,6 +12,7 @@ module Cursorable
     "s" => :down,
     "d" => :right,
     "q" => :quit,
+    "i" => :instructions,
     "\t" => :tab,
     "\r" => :return,
     "\n" => :newline,
@@ -50,6 +51,14 @@ module Cursorable
     when :undo
       undo
       return :undo
+    when :instructions
+      puts "Choose a square with the arrow keys."
+      puts "Select a starting and ending position by pressing Enter."
+      puts "Press u to undo a move"
+      puts "Castle by moving the king two spaces in the appropriate direction"
+      puts "Push anything to continue"
+      STDIN.getch
+      puts "\r"
     else
       puts key
       nil

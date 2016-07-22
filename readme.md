@@ -39,7 +39,8 @@ end
   * `gem install bundler`
   * `bundle install`
   * `ruby lib/game.rb`
-4. To quit, press `ctrl`+`c`
+4. To see instructions, press 'i'
+5. To quit, press 'q'
 
 ###Technical Details
 1. Uses the [colorize][colorize] gem to color the board

@@ -59,10 +59,7 @@ class Display
     unless @last_move == nil
       puts "Last move was from #{parse_move(@last_move[0])} to #{parse_move(@last_move[1])}"
     end
-    puts "Choose a square with the arrow keys."
-    puts "Select a starting and ending position by pressing Enter."
-    puts "Press u to undo a move"
-    puts "Castle by moving the king two spaces in the appropriate direction"
+    puts "Press 'i' to see instructions"
   end
 
   def parse_move(move)

@@ -1,5 +1,4 @@
 require_relative "player"
-require "byebug"
 
 class HumanPlayer < Player
 
