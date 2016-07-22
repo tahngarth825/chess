@@ -2,6 +2,7 @@ require_relative "display"
 require_relative "pieces/sliding_piece"
 require_relative "pieces/step_piece"
 require_relative "pieces/pawn"
+require "byebug"
 
 class Board
   attr_accessor :grid, :last_board, :undo_success
@@ -24,11 +25,11 @@ class Board
 
   def populate
     set_rooks
-    set_knights
-    set_bishops
+  #  set_knights
+  #  set_bishops
     set_kings
-    set_queens
-    set_pawns
+  #  set_queens
+  #  set_pawns
 
     @grid.each_with_index do |row, ridx|
       row.each do |square, cidx|
@@ -88,13 +89,13 @@ class Board
 
   #used to move and see if valid
   def move(start_pos, end_pos, cur_player)
-    if self[start_pos] == nil
+    piece = self[start_pos]
+    if piece == nil
       raise StandardError.new("no piece in starting position")
     end
-    unless self[start_pos].color == cur_player
+    unless piece.color == cur_player
       raise StandardError.new("cannot move enemy piece")
     end
-    piece = self[start_pos]
     if !piece.valid_moves.include?(end_pos)
       raise StandardError.new("piece cannot move to end location")
     end
@@ -142,17 +143,22 @@ class Board
       piece.moved == false &&
       castling_pos.include?(end_pos))
 
-
       if (end_pos == castling_pos[0] || end_pos == castling_pos[1])
         rook = self[[piece.position[0], piece.position[1]-4]]
-        self[[piece.position[0], piece.position[1]-4]] = nil
-        rook.moved = true
-        self[[piece.position[0], piece.position[1]-1]] = rook
+
+        if (!rook.nil? && rook.moved == false)
+          self[[piece.position[0], piece.position[1]-4]] = nil
+          rook.moved = true
+          self[[piece.position[0], piece.position[1]-1]] = rook
+        end
       else
         rook = self[[piece.position[0], piece.position[1]+3]]
-        self[[piece.position[0], piece.position[1]+3]] = nil
-        rook.moved = true
-        self[[piece.position[0], piece.position[1]+1]] = rook
+
+        if (!rook.nil? && rook.moved == false)
+          self[[piece.position[0], piece.position[1]+3]] = nil
+          rook.moved = true
+          self[[piece.position[0], piece.position[1]+1]] = rook
+        end
       end
     end
   end

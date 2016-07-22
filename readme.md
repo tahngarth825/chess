@@ -57,8 +57,7 @@ https://www.ruby-lang.org/en/downloads/
 [cursorable]: https://github.com/rglassett/ruby-cursor-game/blob/master/lib/cursorable.rb
 
 ###Features to implement on my own
-1. Castling (currently bugged b/c calling can_move_to within castling, yet
-  can_move_to checks valid moves)
+1. Castling
 2. En passe
 4. Highlight existing possible moves
 100. Refactoring of code
@@ -81,6 +80,19 @@ Remove debuggers and require byebug
 enable a "q" => quit
 enable "i" => instructions
 
-black rook moving at top, then going back, still allows castling. no piece detected
-in starting position even though cannot land there. seems to only affect black, not
-white?
+Not triggering that rook moved; only that king moved.
+No piece detected in starting position even though cannot land there.
+
+King cannot move to castle location through 2 steps, but can still through 1 step
+
+I still should have nothing in beginning position error, but should no longer
+let king castle when rook moved
+
+
+I should be moving logic of checking if castling is okay from board.rb's handle_castling to
+piece.rb's check_castling
+
+
+Remove debuggers (board and piece)
+
+reset pawn spawn
