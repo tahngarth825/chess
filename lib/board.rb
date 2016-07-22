@@ -7,6 +7,8 @@ class Board
   attr_accessor :grid, :last_board, :undo_success
 
   def initialize(grid = Array.new(8) {Array.new(8) {nil}}, last_board = nil)
+    @en_passant_pos = nil
+    @en_passant_unit = nil
     @grid = grid
     @last_board = last_board
     @undo_success = false;
@@ -87,12 +89,12 @@ class Board
   end
 
   #used to move and see if valid
-  def move(start_pos, end_pos, cur_player)
+  def move(start_pos, end_pos, cur_player_color, other_player)
     piece = self[start_pos]
     if piece == nil
       raise StandardError.new("no piece in starting position")
     end
-    unless piece.color == cur_player
+    unless piece.color == cur_player_color
       raise StandardError.new("cannot move enemy piece")
     end
     if !piece.valid_moves.include?(end_pos)
@@ -101,20 +103,30 @@ class Board
 
     @last_board = deep_dup
 
-    handle_castling(piece, end_pos)
+    if (piece.type == "Ki" && piece.moved == false)
+      handle_castling(piece, end_pos)
+    end
 
     self[start_pos] = nil
     self[end_pos] = piece
 
     piece.update_position(end_pos)
+
+    #if a pawn moved two places, check for en_passant
+    #Return true if should be next player's turn
+    if (piece.type == "P " && (start_pos[0] - end_pos[0]).abs == 2)
+      return handle_en_passant(piece, start_pos, end_pos, other_player)
+    else
+      return true
+    end
   end
 
   #used to force a move without checking for check
-  def move!(start_pos, end_pos, cur_player)
+  def move!(start_pos, end_pos, cur_player_color)
     if self[start_pos] == nil
       raise StandardError.new("no piece in starting position")
     end
-    unless self[start_pos].color == cur_player
+    unless self[start_pos].color == cur_player_color
       raise StandardError.new("cannot move enemy piece")
     end
     piece = self[start_pos]
@@ -138,10 +150,7 @@ class Board
       [7,6]
     ]
 
-    if (piece.type == "Ki" &&
-      piece.moved == false &&
-      castling_pos.include?(end_pos))
-
+    if (castling_pos.include?(end_pos))
       if (end_pos == castling_pos[0] || end_pos == castling_pos[1])
         rook = self[[piece.position[0], piece.position[1]-4]]
 
@@ -160,6 +169,60 @@ class Board
           self[[piece.position[0], piece.position[1]+1]] = rook
           rook.update_position([piece.position[0], piece.position[1]+1])
         end
+      end
+    end
+  end
+
+  def handle_en_passant(pawn, start_pos, end_pos, other_player)
+    #Pawns left and right of pawn end position
+    adj = [ self[[end_pos[0], end_pos[1]+1]],
+      self[[end_pos[0], end_pos[1]-1]] ]
+
+    hungry_pawns = []
+
+    en_passant_pos = nil
+
+    adj.each do |adj_piece|
+      if (!adj_piece.nil? &&
+        adj_piece.color == self.other_color(pawn.color) &&
+        adj_piece.type == "P ")
+
+        #Position where the enemy pawn can eat to
+        en_passant_pos = [(start_pos[0]+end_pos[0])/2, end_pos[1]]
+
+        hungry_pawns.push(adj_piece)
+      end
+    end
+
+    if (hungry_pawns.empty?)
+      return true #allow next player's turn
+    else
+      attack = other_player.prompt_en_passant(hungry_pawns.length)
+      if (attack == "y")
+        response = false
+
+        hungry_pawns.each do |hungry_pawn|
+          if (response == false)
+            response = other_player.handle_en_passant(hungry_pawn.position)
+
+            if (response == true)
+              self[en_passant_pos] = hungry_pawn
+              self[hungry_pawn.position] = nil #old position cleared
+
+              hungry_pawn.update_position(en_passant_pos)
+
+              self[end_pos] = nil #remove eaten pawn
+            end
+          end
+        end
+
+        if (response == true)
+          return false #Take your turn again
+        else
+          return true #Opponent didn't do en passant; s/he takes turn as normal
+        end
+      else
+        return true #Don't perform en passant
       end
     end
   end

@@ -56,8 +56,10 @@ class Game
       if move == nil
         return
       end
-      @board.move(move[0], move[1], cur_player.color)
-      next_player
+      rotate_players = @board.move(move[0], move[1], cur_player.color, other_player)
+      if (rotate_players == true)
+        next_player
+      end
       rescue StandardError => e
         puts e.message
         retry

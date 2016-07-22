@@ -48,4 +48,12 @@ class ComputerPlayer < Player
     end
     best_move(display, all_moves)
   end
+
+  def prompt_en_passant(num_pawns)
+    return "y"
+  end
+
+  def handle_en_passant(pawn_pos)
+    return true
+  end
 end

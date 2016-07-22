@@ -27,4 +27,41 @@ class HumanPlayer < Player
     end
     return move
   end
+
+  def prompt_en_passant(num_pawns)
+    verb = "are"
+    pawns = "pawns"
+    if (num_pawns == 1)
+      verb = "is"
+      pawns = "pawn"
+    end
+
+    response = false
+
+    while (response != "y" && response != "n")
+      puts "There #{verb} #{num_pawns} #{pawns} with which #{self.name} can perform en passant."
+      puts "Perform en passant? (y/n)"
+      response = gets.chomp.downcase
+    end
+
+    return response
+  end
+
+  def handle_en_passant(pawn_pos)
+    down = pawn_pos[0]
+    right = pawn_pos[1]
+
+    response = false
+
+    while (response != "y" && response != "n")
+      puts "Perform en passant with the pawn #{down} down and #{right} right? (y/n)"
+      response = gets.chomp.downcase
+    end
+
+    if (response == "y")
+      return true
+    else
+      return false
+    end
+  end
 end
