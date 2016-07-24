@@ -8,8 +8,6 @@ Features that I updated include a choice of 1-player or 2-player, instructions, 
 ###Video Demonstration
 https://youtu.be/GK7Cz2aNQ9A
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/GK7Cz2aNQ9A" frameborder="0" allowfullscreen></iframe>
-
 ####Screenshot
 ![image of game](http://res.cloudinary.com/tahngarth825/image/upload/v1468877930/checkmate_rheehe.png)
 
