@@ -41,11 +41,11 @@ class Display
         end
 
         if cursor_pos == [ridx, cidx]
-          bg = :magenta
+          bg = :blue
         elsif @selected == [ridx, cidx]
           bg = :light_yellow
         elsif @valid_moves.include?([ridx, cidx])
-          bg = :green
+          bg = :light_green
         end
 
         if square == nil
