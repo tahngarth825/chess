@@ -56,11 +56,11 @@ module Cursorable
       puts "Select a starting and ending position by pressing Enter."
       puts "Press u to undo a move"
       puts "Castle by moving the king two spaces in the appropriate direction"
+      puts "Press q to quit"
       puts "Push anything to continue"
       STDIN.getch
       puts "\r"
     else
-      puts key
       nil
     end
   end
