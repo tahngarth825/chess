@@ -6,11 +6,7 @@ Features that I updated include a choice of 1-player or 2-player, instructions, 
 [partner]: https://github.com/jordvnkm
 
 ###Video Demonstration
-https://youtu.be/GK7Cz2aNQ9A
-
-####Screenshot
-![image of game](http://res.cloudinary.com/tahngarth825/image/upload/v1468877930/checkmate_rheehe.png)
-
+[![video demonstration](http://res.cloudinary.com/tahngarth825/image/upload/v1468877930/checkmate_rheehe.png)](https://youtu.be/GK7Cz2aNQ9A)
 
 ####Code for deep duping that allows for the undo function
 ```ruby
